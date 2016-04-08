@@ -25,10 +25,11 @@ gen_alias([Def|Rest], _, Alias, Acc) ->
   gen_alias(Rest, {}, Alias, [Def|Acc]).
 
 export_alias(Forms, Alias) ->
-  lists:map(fun
-              ({attribute,N,export,Exports}) ->
-                {attribute,N,export,Exports ++ Alias};
-              (Other) -> 
-                Other
-            end, Forms).
+  {_, Forms1} = lists:foldl(fun
+                              ({attribute,N,export,Exports}, {A, Acc}) ->
+                                {[], [{attribute,N,export,Exports ++ A}|Acc]};
+                              (Other, {A, Acc}) -> 
+                                {A, [Other|Acc]}
+                            end, {Alias, []}, Forms),
+  lists:reverse(Forms1).
 
