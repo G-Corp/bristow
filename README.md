@@ -9,13 +9,13 @@ First, add *Bristow* in your dependencies.
 Then, add the following option to the erlang compiler flags:
 
 ```erlang
-{parse_transform, lager_transform}
+{parse_transform, bristow_transform}
 ```
 
 Alternately, you can add it to the module you wish to compile with alias enabled:
 
 ```erlang
--compile([{parse_transform, lager_transform}]).
+-compile([{parse_transform, bristow_transform}]).
 ```
 
 In your modules, place an alias attribute after each function you want to create an alias by specifying the name of the alias :
