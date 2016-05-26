@@ -1,0 +1,7 @@
+{application, bristow, [
+	{description, "Create function's alias"},
+	{vsn, "0.0.1"},
+	{modules, []},
+	{registered, []},
+	{applications, [kernel,stdlib]}
+]}.
