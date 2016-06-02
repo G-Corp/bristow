@@ -1,11 +1,18 @@
-PROJECT = bristow
+.PHONY: doc
+REBAR = ./rebar3
 
-DEP_PLUGINS = mix.mk
-BUILD_DEPS = mix.mk
-ELIXIR_VERSION = ~> 1.2
-dep_mix.mk = git https://github.com/botsunit/mix.mk.git master
+compile:
+	@$(REBAR) compile
 
-include erlang.mk
+tests:
+	@$(REBAR) eunit
 
-release: app mix.exs
+elixir:
+	@$(REBAR) elixir generate_mix
+	@$(REBAR) elixir generate_lib
+
+dist: compile tests elixir
+
+distclean:
+	@rm -rf _build rebar.lock mix.lock test/eunit
 

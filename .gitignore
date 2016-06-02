@@ -12,3 +12,5 @@ ext
 .rebar
 .erlang.mk
 *.d
+test/eunit/
+_build/
