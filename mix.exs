@@ -14,7 +14,7 @@ defmodule Bristow.Mixfile do
 
   def application do
     [
-       applications: [:kernel, :stdlib],
+       applications: [],
        env: []
     ]
   end
