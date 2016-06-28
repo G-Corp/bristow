@@ -1,7 +1,18 @@
 {application, bristow, [
-	{description, "Create function's alias"},
-	{vsn, "0.0.3"},
-	{modules, []},
-	{registered, []},
-	{applications, [kernel,stdlib]}
+	  {description, "Create function's alias"}
+	, {vsn, "0.1.0"}
+	, {modules, []}
+	, {registered, []}
+	, {applications, [kernel,stdlib]}
+
+  , {maintainers, ["Gregoire Lejeune"]}
+  , {licenses, ["BSD-3"]}
+  , {links, [{"Github", "https://github.com/botsunit/bristow"}]}
+  , {files, ["src/*"
+             , "Makefile"
+             , "README.md"
+             , "rebar.config"
+             , "rebar.lock"
+             , "mix.exs"]}
+  , {build_tools, ["rebar3", "mix", "make"]}
 ]}.
