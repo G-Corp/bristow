@@ -11,24 +11,24 @@ gen_alias(Forms) ->
 
 gen_alias([], _, Alias, Acc) ->
   {Alias, lists:reverse(Acc)};
-gen_alias([{function,_,Name,_,[{clause,_,Args,_,_}|_]} = Fun|Rest], _, Alias, Acc) ->
+gen_alias([{function, _, Name, _, [{clause, _, Args, _, _}|_]} = Fun|Rest], _, Alias, Acc) ->
   gen_alias(Rest, {Name, Args}, Alias, [Fun|Acc]);
-gen_alias([{attribute,N,alias,Name}|Rest], {Fun, Args}, Alias, Acc) ->
-  gen_alias(Rest, {Fun, Args}, [{Name, length(Args)}|Alias], [{function,N,Name,length(Args),
-                                                               [{clause,N,
+gen_alias([{attribute, N, alias, Name}|Rest], {Fun, Args}, Alias, Acc) ->
+  gen_alias(Rest, {Fun, Args}, [{Name, length(Args)}|Alias], [{function, N, Name, length(Args),
+                                                               [{clause, N,
                                                                  Args,
                                                                  [],
-                                                                 [{call,N,{atom,1,Fun},Args}]}]}|Acc]);
-gen_alias([{attribute,_,alias,_}|_], {}, _, _) ->
+                                                                 [{call, N, {atom, 1, Fun}, Args}]}]}|Acc]);
+gen_alias([{attribute, _, alias, _}|_], {}, _, _) ->
   erlang:throw("-alias must follow a function definition");
 gen_alias([Def|Rest], _, Alias, Acc) ->
   gen_alias(Rest, {}, Alias, [Def|Acc]).
 
 export_alias(Forms, Alias) ->
   {_, Forms1} = lists:foldl(fun
-                              ({attribute,N,export,Exports}, {A, Acc}) ->
-                                {[], [{attribute,N,export,Exports ++ A}|Acc]};
-                              (Other, {A, Acc}) -> 
+                              ({attribute, N, export, Exports}, {A, Acc}) ->
+                                {[], [{attribute, N, export, Exports ++ A}|Acc]};
+                              (Other, {A, Acc}) ->
                                 {A, [Other|Acc]}
                             end, {Alias, []}, Forms),
   lists:reverse(Forms1).
