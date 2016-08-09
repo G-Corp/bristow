@@ -10,6 +10,7 @@
   , {links, [{"Github", "https://github.com/botsunit/bristow"}]}
   , {files, ["src/*"
              , "Makefile"
+             , "bu.mk"
              , "README.md"
              , "rebar.config"
              , "rebar.lock"
