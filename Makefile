@@ -2,6 +2,6 @@ HAS_ELIXIR=1
 
 include bu.mk
 
-release: dist
+release: dist lint tag ##Publish a new release
 	$(verbose) $(REBAR) hex publish
 
