@@ -1,6 +1,6 @@
 {application, bristow, [
 	  {description, "Create function's alias"}
-	, {vsn, "0.1.1"}
+	, {vsn, "0.1.2"}
 	, {modules, []}
 	, {registered, []}
 	, {applications, [kernel,stdlib]}
