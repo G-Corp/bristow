@@ -1,10 +1,14 @@
+# File: mix.exs
+# This file was generated from rebar.config
+# Using rebar3_elixir (https://github.com/G-Corp/rebar3_elixir)
+# MODIFY IT AT YOUR OWN RISK AND ONLY IF YOU KNOW WHAT YOU ARE DOING!
 defmodule Bristow.Mixfile do
   use Mix.Project
 
   def project do
     [
       app: :bristow,
-      version: "0.2.3",
+      version: "0.3.0",
       elixir: "~> 1.2",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -21,7 +25,7 @@ defmodule Bristow.Mixfile do
   end
 
   defp deps do
-    [    
+    [
     ]
   end
 
@@ -51,10 +55,18 @@ defmodule Bristow.Mixfile do
     for command <- commands, do: (fn
       ({regex, cmd}) ->
          if Regex.match?(Regex.compile!(regex), Atom.to_string(os)) do
-           Mix.Shell.cmd cmd, [], fn(x) -> Mix.Shell.IO.info(String.strip(x)) end
+           Mix.Shell.cmd cmd, [], fn(x) -> Mix.Shell.IO.info(trim(x)) end
          end
       (cmd) ->
-        Mix.Shell.cmd cmd, [], fn(x) -> Mix.Shell.IO.info(String.strip(x)) end
+        Mix.Shell.cmd cmd, [], fn(x) -> Mix.Shell.IO.info(trim(x)) end
       end).(command)
-  end    
+  end
+
+  defp trim(x) do
+    if Version.compare(System.version, "1.5.0") == :lt do
+      Kernel.apply(String, :strip, [x])
+    else
+      Kernel.apply(String, :trim, [x])
+    end
+  end
 end
